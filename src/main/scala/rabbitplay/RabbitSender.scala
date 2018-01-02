@@ -1,8 +1,8 @@
 package rabbitplay
 
 trait RabbitSender extends RabbitSetup {
-  def send(message: String): Unit = {
-    println(s"Sending message '$message' to queue '$queue'")
-    channel.basicPublish("logs", "", null, message.getBytes)
+  def send(message: String, routingKey: String): Unit = {
+    println(s"Sending message '$message' to routingKey '$routingKey'")
+    channel.basicPublish(exchange_name, routingKey, null, message.getBytes)
   }
 }

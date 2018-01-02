@@ -9,10 +9,12 @@ trait RabbitSetup {
   factory.setHost("localhost")
   val connection: Connection = factory.newConnection()
   val channel: Channel = connection.createChannel()
-  val exchange = channel.exchangeDeclare("logs", "fanout", false, false, null)
-  val raw_queue = channel.queueDeclare("lequeue", false, false, false, null)
-  val queue: String = raw_queue.getQueue
-  channel.queueBind(queue, "logs", "")
+  val exchange_name = "lechats"
+  val exchange = channel.exchangeDeclare(exchange_name, "topic")
+
+  //val raw_queue = channel.queueDeclare("lequeue", false, false, false, null)
+  //val queue: String = raw_queue.getQueue
+  //channel.queueBind(queue, "logs", "")
 
   // Utils
   def fromBytes(x: Array[Byte]) = new String(x, "UTF-8")

@@ -1,7 +1,9 @@
 package rabbitplay
 
 object Main extends App with RabbitSender with RabbitReceiver {
-  consume()
+  // Consuming queue chat.*
+  consume("chat.*")
 
-  send("MEEEEEEEEEH!")
+  // Sending to chat.patata
+  send("LeTest", "chat.patata")
 }
